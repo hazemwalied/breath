@@ -5,9 +5,9 @@
   --forth-color: #01a744;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-padding-top: 90px; } /* يعوّض الهيدر لكل الأنكورز */
+@media (max-width: 767px){ html { scroll-padding-top: 110px; } }
+
 
 body {
   font-family: "Almarai", sans-serif;
@@ -115,16 +115,46 @@ a {
   max-height: 500px; /* Optional to limit video height */
 }
 .product img {
-  max-width: fit-content;
-  position: relative;
-  left: -200px;
-  height: 500px;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
+  width: 100%;             /* تخلي الصورة تاخد عرض الشاشة */
+  max-width: 100%;         /* تمنع تجاوز العرض */
+  height: auto;            /* تحافظ على نسبة الطول/العرض */
+  display: block;          /* تمنع أي مسافات إضافية */
+  border-radius: 20px;     /* لو محتاج حواف ناعمة */
+  object-fit: cover;       /* تضمن أن الصورة تتغطى بشكل مناسب */
 }
+/* الموبايل */
+@media (max-width: 576px) {
+  .product { 
+    height: auto;          /* سيب الارتفاع على قد المحتوى */
+    padding: 0; 
+  }
+  .product img {
+    width: 100%;
+    height: auto;          /* منع القص نهائيًا */
+    object-fit: contain;   /* تعرض الصورة كاملة بدون قص */
+    border-radius: 0;
+    display: block;
+  }
+}
+
+
+/* التابلت */
+@media (min-width: 577px) and (max-width: 992px) {
+  .product { height: 75vh; }
+  .product img { border-radius: 10px; }
+}
+
+/* الديسكتوب والكبير */
+@media (min-width: 993px) {
+  .product { height: 100vh; }   /* فول سكرين */
+  .product img { border-radius: 20px; }
+}
+
+/* شاشات عريضة جداً (اختياري) */
+@media (min-width: 1400px) {
+  .product { height: 100vh; }   /* يفضل تسيبها فول سكرين برضه */
+}
+
 .mute-button {
   position: absolute;
   bottom: 20px;
@@ -143,22 +173,26 @@ a {
   right: 50%;
   text-align: right;
 }
+
 .carousel-caption span {
   color: var(--secondary-color);
   margin-bottom: 30px;
   font-size: 50px;
 }
+
 .carousel-caption h2 {
   margin-top: 20px;
   background-color: #01818a;
   padding: 8px 15px;
   border-radius: 20px;
 }
+
 .carousel-caption p {
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: #01818a;
 }
+
 @media (max-width: 767px) {
   .carousel-caption span {
     font-size: 16px; /* أصغر للموبايل */
@@ -199,6 +233,8 @@ a {
     }
   }
 }
+
+
 .order {
   display: inline-block;
   text-decoration: none;
@@ -250,7 +286,6 @@ a {
 }
 .feat {
   position: relative;
-
   z-index: 999;
   margin-top: -30px;
 }
@@ -582,6 +617,14 @@ a {
   display: inline-block;
   width: 35px;
 }
+.form-check-label1 img{
+    display: inline-block;
+  width: 20px;
+}
+.form-check-label2 img{
+    display: inline-block;
+  width: 25px;
+}
 .payment-btn {
   border: 1px solid #f9fafc;
   margin-right: 10px;
@@ -630,7 +673,7 @@ hr {
   width: 50%;
 }
 .btn-checkout {
-  background-color: #018944;
+  background-color: var(--main-color);
   color: #fff;
   width: 90%;
   margin: 20px auto;
@@ -700,6 +743,18 @@ hr {
   .card-info {
     display: block;
   }
+}
+ .adrees h2{
+    margin-bottom: 60px;
+ }
+.adrees p {
+    display: flex;
+  flex-direction: column; /* يخلي الأيقونات فوق و HPI تحت */
+  align-items: center;   /* يخلي كل حاجة في النص */
+  justify-content: center;
+  text-align: center;    /* يخلي النصوص في النص */
+  margin: 0;
+  margin-bottom: 60px;
 }
 /*contact Us Ends*/
 

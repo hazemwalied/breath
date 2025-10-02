@@ -1,9 +1,128 @@
 /*offers  start*/
+
+  :root{
+    --teal:#007f86;           /* الخلفية الخارجية للكارت */
+    --teal-700:#006a70;
+    --card-bg:#0e8c92;        /* الغامق */
+    --inner:#ffffff;          /* المربع الأبيض الداخلي */
+    --muted:#e7f6f7;
+    --text:#0c4a4e;
+    --shadow:0 12px 28px rgba(0,0,0,.10), 0 6px 14px rgba(0,0,0,.06);
+  }
+
+  .qty-offers{ padding:36px 0 48px; background:#fff; }
+  .qty-offers .container{ max-width:1200px; margin:0 auto; padding:0 16px; }
+  .section-title{ margin:0 0 18px; font-size:28px; font-weight:800; color:#333; }
+
+  /* Grid for md+ */
+  .cards-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+
+  /* Card outer */
+  .offer-card{
+    background:var(--card-bg);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:16px;                      /* مساحة للمربع الأبيض */
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .offer-card:hover{ transform:translateY(-4px); box-shadow:0 18px 36px rgba(0,0,0,.12); }
+
+  /* Inner white box */
+  .card-inset{
+    background:var(--inner);
+    border-radius:14px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+  }
+
+  /* Smaller image box */
+  .card-top{
+    padding:18px 16px 0;              /* أصغر من قبل */
+    display:grid;
+    place-items:center;
+    background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,127,134,0.06) 100%);
+  }
+  .product-img{
+    width:min(58%, 200px);             /* تصغير الصورة */
+    height:auto;
+    display:block;
+  }
+
+  .card-body{
+    padding:12px 18px 20px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .offer-title{
+    font-size:22px;
+    font-weight:800;
+    color:var(--text);
+    margin:10px 0 8px;                 /* العنوان ثم الخصم مباشرة */
+  }
+
+  /* خصم 30% نفس الحجم وعلى سطر واحد */
+  .discount-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin:0 0 12px;
+    position:relative;
+  }
+  .discount-badge .word,
+  .discount-badge .percent{
+    font-size:22px;                    /* نفس المقاس */
+    font-weight:900;
+    color:var(--text);
+    line-height:1;
+  }
+  /* سبوت خفيف خلف كلمة خصم */
+  .discount-badge .word{ position:relative; }
+  .discount-badge .word::before{
+    content:"";
+    position:absolute; inset:-6px -12px;
+    background:radial-gradient(circle at 55% 55%, rgba(0,127,134,.20), rgba(0,127,134,0) 60%);
+    filter:blur(5px);
+    border-radius:36px;
+    z-index:-1;
+  }
+
+  /* CTA */
+  .cta-btn{
+    margin-top:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--teal);
+    color:#fff;
+    border:1px solid var(--teal);
+    padding:10px 22px;
+    border-radius:999px;
+    font-weight:800;
+    text-decoration:none;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .cta-btn:hover{ background:var(--teal-700); transform:translateY(-1px); }
+
+  /* Indicators لون غامق مناسب */
+  #QtyOffersMobile .carousel-indicators [data-bs-target]{ background-color:#0c4a4e; }
+
 .offers {
   .section-title {
+    
     text-align: center;
     h3 {
       color: var(--main-color);
+      font-weight: bold;
     }
     p {
       color: #555;
@@ -11,8 +130,13 @@
   }
   .offers-content {
     margin-top: 40px;
-
+    .persons-offers h4{
+      text-align: center;
+      font-weight:bolder;
+    }
+    
     .persons-offers {
+      
       margin-bottom: 30px;
 
       .discount {
@@ -75,6 +199,7 @@
           border: 1px solid var(--main-color);
         }
       }
+      
     }
   }
 }
