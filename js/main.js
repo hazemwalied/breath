@@ -1,8 +1,10 @@
 function show1() {
-  document.getElementById("card-info1").style.display = "none";
+  const el = document.getElementById("card-info1");
+  if (el) el.style.display = "none";
 }
 function show2() {
-  document.getElementById("card-info1").style.display = "block";
+  const el = document.getElementById("card-info1");
+  if (el) el.style.display = "block";
 }
 
 // JavaScript function to toggle mute/unmute
@@ -45,22 +47,19 @@ let message = "";
 const pageLang = (document.documentElement.lang || "ar").slice(0, 2);
 const offerMessages = {
   ar: {
-    1: "خصم 20 جنيه",
+    // شلنا 1 و 4
     2: "شحن مجاني",
-    3: "2 سالين + شحن مجاني",
-    4: "6 سالين + شحن مجاني",
-    20: "خصم 20%",
-    40: "خصم 25%",
-    100: "خصم 30%",
+    3: "3 سالين + شحن مجاني",
+    perc20: "خصم 20%",
+    perc25: "خصم 25%",
+    perc30: "خصم 30%",
   },
   en: {
-    1: "EGP 20 off",
     2: "Free shipping",
-    3: "2 saline + Free shipping",
-    4: "6 saline + Free shipping",
-    20: "20% off",
-    40: "25% off",
-    100: "30% off",
+    3: "3 saline + Free shipping",
+    perc20: "20% off",
+    perc25: "25% off",
+    perc30: "30% off",
   },
 };
 const dict = offerMessages[pageLang] || offerMessages.ar;
@@ -71,45 +70,34 @@ function updateTotalsAndOffer() {
 
   const qty = Number(quntityInput.value) || 0;
 
-  // total
+  // الإجمالي (بدون تطبيق الخصم فعليًا)
   totalInput.value = qty * FIXED_PRICE;
 
-  // define the offer message by the quantity number
-  switch (qty) {
-    case 0:
-      message = "";
-      break;
-    case 1:
-      message = dict[1];
-      break;
-    case 2:
-      message = dict[2];
-      break;
-    case 3:
-      message = dict[3];
-      break;
-    case 4:
-      message = dict[4];
-      break;
-    case 20:
-      message = dict[20];
-      break;
-    case 40:
-      message = dict[40];
-      break;
-    case 100:
-      message = dict[100];
-      break;
-    default:
-      message = "";
+  // تحديد رسالة العرض حسب المطلوب:
+  // - إلغاء رقم 1 (خصم 20 جنيه) ورقم 4 (6 سالين + شحن مجاني)
+  // - 5-19 = خصم 20% ، 20-59 = خصم 25% ، 60+ = خصم 30%
+  if (qty === 0) {
+    message = "";
+  } else if (qty === 2) {
+    message = dict[2];
+  } else if (qty === 3) {
+    message = dict[3];
+  } else if (qty >= 60) {
+    message = dict.perc30;
+  } else if (qty >= 20) {
+    message = dict.perc25;
+  } else if (qty >= 5) {
+    message = dict.perc20;
+  } else {
+    // يغطي 1 و 4 وغيرهم -> لا رسالة
+    message = "";
   }
 
   offerMessageContainer.textContent = message;
 
-  // control on visibility of offer message container
+  // التحكم في ظهور رسالة العرض
   if (message !== "") {
     offerMessageContainer.style.display = "block";
-    console.log("work");
   } else {
     offerMessageContainer.style.cssText = "display: none";
   }
