@@ -52,7 +52,7 @@ a {
     }
   }
   .nav-item {
-    padding-left: 15px;
+    padding-left: 10px;
     &:hover .nav-link {
       color: var(--main-color);
     }
@@ -362,14 +362,23 @@ a {
   position: relative;
   top: -50px;
 }
-.about-cont h2 {
-  margin-bottom: 10px;
+.about-cont h2{
   font-size: 25px;
-  color: #01818a;
- position: relative;
-  top: -50px;
   font-weight: bold;
+  text-align: center;
+  color: #fff;                 /* نص أبيض عشان الكونتراست */
+  background: #01818a;         /* نفس لون المنتج */
+  display: inline-block;       /* على قدّ الكلام بس */
+  padding: .45rem .9rem;       /* مسافة داخلية بسيطة */
+  border-radius: 10px;         /* حواف دائرية */
+  margin-bottom: 10px;
+  position: relative;
+  top: -50px;                  /* زي ما كنت عامل */
+  box-shadow: 0 6px 18px rgba(0,0,0,.08); /* اختياري: ظل خفيف */
 }
+
+
+
 
 .about-cont p {
   background: #f9f9f9;
@@ -421,10 +430,18 @@ a {
   border-radius: 10px;
   padding-bottom: 15px;
 }
+
+/* إصلاح تمدّد الصورة: نحافظ على النِّسب */
 .about-img-slider img {
-  width: 90%;
-  height: 500px;
+  width: 100%;        /* متوافق مع w-100 في الـHTML */
+  height: auto;       /* أهم تعديل */
+  display: block;
   margin: 10px auto;
+}
+
+/* مؤشرات السلايدر */
+.about-img-slider .carousel-indicators {
+  position: static;
 }
 
 .about-img-slider .carousel-indicators button.thumbnail {
@@ -434,30 +451,40 @@ a {
   background-color: var(--main-color);
   border: 1px solid #aaa;
 }
+
+/* ضبط صورة الـthumbnail لتناسب حجم الزر */
 .about-img-slider .carousel-indicators button.thumbnail img {
-  height: 100px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
+
 .about-img-slider .carousel-indicators button.thumbnail:not(.active) {
   opacity: 0.5;
 }
-.about-img-slider .carousel-indicators {
-  position: static;
-}
+
 @media screen and (min-width: 992px) {
   .about-img-slider .carousel {
     max-width: 70%;
     margin: 0 auto;
   }
 }
+
 /*about us styling End*/
 
 /* Start How To Use Section */
 .usability {
   .title {
-    margin: 40px auto;
-    color: var(--main-color);
-    text-align: center;
-    font-size: 30px;
+    margin: 40px auto;             /* يوسّط العنصر */
+  width: fit-content;             /* على قدّ الكلمة */
+  background: var(--main-color);  /* نفس لون اللي فوق */
+  color: #fff;                    /* تباين واضح */
+  font-size: 30px;
+  line-height: 1.2;
+  padding: .45rem .9rem;          /* مسافة داخلية بسيطة */
+  border-radius: 10px;            /* حواف ناعمة */
+  text-align: center;             /* لو العنوان طويل */
+  box-shadow: 0 6px 18px rgba(0,0,0,.08); /* اختياري: ظل خفيف */
   }
   .how-to-use {
     width: 45%;

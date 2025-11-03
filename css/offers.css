@@ -15,106 +15,148 @@
   .section-title{ margin:0 0 18px; font-size:28px; font-weight:800; color:#333; }
 
   /* Grid for md+ */
-  .cards-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:22px;
+  /* توزيع 3 كروت بالتساوي داخل قسم عروض الافراد فقط */
+@media (min-width: 768px){ /* md وما فوق */
+  .persons-offers .row > .col-md-3{
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
   }
+}
 
-  /* Card outer */
-  .offer-card{
-    background:var(--card-bg);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    padding:16px;                      /* مساحة للمربع الأبيض */
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .offer-card:hover{ transform:translateY(-4px); box-shadow:0 18px 36px rgba(0,0,0,.12); }
+/* أكوادك كما هي */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:22px;
+}
 
-  /* Inner white box */
-  .card-inset{
-    background:var(--inner);
-    border-radius:14px;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    height:100%;
-  }
+/* Card outer */
+.q-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 576px){
+  .q-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+}
+@media (min-width: 992px){
+  .q-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
+}
 
-  /* Smaller image box */
-  .card-top{
-    padding:18px 16px 0;              /* أصغر من قبل */
-    display:grid;
-    place-items:center;
-    background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,127,134,0.06) 100%);
-  }
-  .product-img{
-    width:min(58%, 200px);             /* تصغير الصورة */
-    height:auto;
-    display:block;
-  }
+/* الكارت */
+.q-card{
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 1px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  height: 100%;
+}
+.q-card:hover{ transform: translateY(-3px); box-shadow: 0 18px 36px rgba(0,0,0,.12); }
 
-  .card-body{
-    padding:12px 18px 20px;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
+/* الإطار الداخلي بنفس روح الصورة (حدود + زاوية) */
+.q-inset{
+  background: var(--inner);
+  border-radius: 16px;
+  border: 4px solid var(--teal);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+/* صندوق الصورة — قصير ومُوحَّد الارتفاع */
+/* صندوق الصورة */
+.q-img-box{
+  background: linear-gradient(180deg, #fff 0%, rgba(0,127,134,.06) 100%);
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;        /* موبايل: قصير */
+  padding: 0;                  /* مهم: عشان الصورة تملأ الصندوق */
+  overflow: hidden;            /* يخفي أي قصّ للحواف */
+  border-radius: inherit;      /* نفس تدوير الكارت */
+}
 
-  .offer-title{
-    font-size:22px;
-    font-weight:800;
-    color:var(--text);
-    margin:10px 0 8px;                 /* العنوان ثم الخصم مباشرة */
-  }
+@media (min-width: 576px){
+  .q-img-box{ aspect-ratio: 4 / 3; } /* تابلت/دسكتوب */
+}
 
-  /* خصم 30% نفس الحجم وعلى سطر واحد */
-  .discount-badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    margin:0 0 12px;
-    position:relative;
-  }
-  .discount-badge .word,
-  .discount-badge .percent{
-    font-size:22px;                    /* نفس المقاس */
-    font-weight:900;
-    color:var(--text);
-    line-height:1;
-  }
-  /* سبوت خفيف خلف كلمة خصم */
-  .discount-badge .word{ position:relative; }
-  .discount-badge .word::before{
-    content:"";
-    position:absolute; inset:-6px -12px;
-    background:radial-gradient(circle at 55% 55%, rgba(0,127,134,.20), rgba(0,127,134,0) 60%);
-    filter:blur(5px);
-    border-radius:36px;
-    z-index:-1;
-  }
+/* الصورة نفسها */
+.q-img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;           /* تملى البوكس بالكامل */
+  object-position: center;     /* توسيط المنطقة المهمة من الصورة */
+}
 
-  /* CTA */
-  .cta-btn{
-    margin-top:8px;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:var(--teal);
-    color:#fff;
-    border:1px solid var(--teal);
-    padding:10px 22px;
-    border-radius:999px;
-    font-weight:800;
-    text-decoration:none;
-    transition:background .2s ease, transform .2s ease;
-  }
-  .cta-btn:hover{ background:var(--teal-700); transform:translateY(-1px); }
 
-  /* Indicators لون غامق مناسب */
-  #QtyOffersMobile .carousel-indicators [data-bs-target]{ background-color:#0c4a4e; }
+/* النصوص والمحتوى */
+.q-body{
+  padding: 12px 16px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;            /* يخلي الزرار ينزل تحت */
+}
+
+.q-title{
+  color: var(--text);
+  font-weight: 800;
+  font-size: 18px;
+  margin: 6px 0 2px;
+}
+@media (min-width: 576px){ .q-title{ font-size: 20px; } }
+@media (min-width: 992px){ .q-title{ font-size: 22px; } }
+
+/* شارة الخصم */
+.q-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-weight: 900;
+  line-height: 1;
+}
+.q-badge span{ position: relative; }
+.q-badge span::before{
+  content: "";
+  position: absolute; inset: -6px -10px;
+  background: radial-gradient(circle at 55% 55%, var(--ring-20), transparent 60%);
+  filter: blur(5px);
+  border-radius: 30px;
+  z-index: -1;
+}
+.q-badge strong{ font-size: 2em; }
+
+@media (max-width: 575.98px){
+  .q-cta{
+    width: 100%;
+    justify-content: center;   /* يوسّط الأيقونة والنص أفقيًا */
+    text-align: center;        /* احتياط */
+  }
+}
+
+/* زر CTA */
+.q-cta{
+  margin-top: auto;          /* يثبت أسفل الكارت */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal);
+  color: #fff;
+  border: 1px solid var(--teal);
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+  width: 100%;               /* موبايل: بعرض الكارت */
+}
+.q-cta:hover{ background: var(--teal-700); transform: translateY(-1px); }
+@media (min-width: 992px){ .q-cta{ width: auto; } }
 
 .offers {
   .section-title {
@@ -130,9 +172,9 @@
   }
   .offers-content {
     margin-top: 40px;
-    .persons-offers h4{
+    .persons-offers h2{
       text-align: center;
-      font-weight:bolder;
+      font-weight: bold;
     }
     
     .persons-offers {
