@@ -98,13 +98,24 @@ let message = "";
 
 function updateTotalsAndOffer() {
   if (!quntityInput || !totalInput || !offerMessageContainer) return;
+
   const qty = Number(quntityInput.value) || 0;
 
   const baseTotal = qty * FIXED_PRICE;
   let discountRate = 0;
+  let shippingCost = 0;   // <— شحن
+
+  // الرسالة الافتراضية
+  message = "";
 
   if (qty === 0) {
     message = "";
+  } else if (qty === 1) {
+    // شحن 90 جنيه لجميع المحافظات عند طلب قطعة واحدة
+    shippingCost = 90;
+    message = (LANG === "ar")
+      ? "شحن 90 جنية لجميع المحافظات"
+      : "Shipping 90 EGP to all governorates";
   } else if (qty === 2) {
     message = T("offer_2");
     discountRate = 0;
@@ -120,17 +131,16 @@ function updateTotalsAndOffer() {
   } else if (qty >= 5) {
     message = T("offer_20");
     discountRate = 0.20;
-  } else {
-    message = "";
-    discountRate = 0;
   }
 
-  const discountedTotal = Math.round(baseTotal * (1 - discountRate));
+  // الإجمالي بعد الخصم + الشحن (لو فيه)
+  const discountedTotal = Math.round(baseTotal * (1 - discountRate)) + shippingCost;
   totalInput.value = discountedTotal;
 
   offerMessageContainer.textContent = message;
   offerMessageContainer.style.display = message ? "block" : "none";
 }
+
 
 // init + listeners
 updateTotalsAndOffer();

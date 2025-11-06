@@ -476,12 +476,12 @@ a {
 .usability {
   .title {
     margin: 40px auto;             /* يوسّط العنصر */
-  width: fit-content;             /* على قدّ الكلمة */
+  width:100%;             /* على قدّ الكلمة */
   background: var(--main-color);  /* نفس لون اللي فوق */
   color: #fff;                    /* تباين واضح */
   font-size: 30px;
   line-height: 1.2;
-  padding: .45rem .9rem;          /* مسافة داخلية بسيطة */
+  padding: .8rem .9rem;          /* مسافة داخلية بسيطة */
   border-radius: 10px;            /* حواف ناعمة */
   text-align: center;             /* لو العنوان طويل */
   box-shadow: 0 6px 18px rgba(0,0,0,.08); /* اختياري: ظل خفيف */
@@ -717,7 +717,7 @@ hr {
 .contact-info p {
   color: var(--secondary-color);
 }
-.contact-field {
+/* .contact-field {
   display: flex;
   margin-bottom: 20px;
 }
@@ -735,13 +735,53 @@ hr {
   display: inline-block;
   width: 50%;
   margin-right: 10px;
-  /* margin-top: 10px; */
   padding-top: 10px;
 }
 .cont-icon img {
   width: 70%;
   margin: 10px;
+} */
+.contact-field{
+  display:flex;
+  align-items:center;
+  gap:14px;             /* المسافة بين الأيقونة والنص */
+  margin-bottom:20px;
 }
+
+.contact-field h5{
+  color:var(--secondary-color);
+  margin:0 0 4px;
+}
+
+.cont-icon{
+  width:60px; height:60px;
+  background-color:var(--secondary-color);
+  border-radius:50%;
+  display:grid;         /* لمركزة الأيقونة */
+  place-items:center;
+  flex:0 0 60px;        /* ثبات الحجم */
+}
+
+.cont-icon img{
+  width:70%;
+  height:auto;
+}
+
+.cont-txt{
+  padding-top:10px;
+  flex:1 1 auto;        /* بدل width:50% و inline-block */
+}
+
+/* لو عندك قسم عربي وعايز الأيقونة يمين */
+.section-ar .contact-field{ flex-direction:row-reverse; }
+
+/* علشان الإيميل/الرقم يفضل LTR داخل العربي */
+.cont-txt p[dir="ltr"]{ direction:ltr; unicode-bidi:bidi-override; }
+
+/* بديل لو مش حابب gap:
+.cont-txt{ margin-inline-start:12px; }
+*/
+
 .top-bar-social {
   float: left;
   padding-top: 6px;
@@ -771,17 +811,43 @@ hr {
     display: block;
   }
 }
- .adrees h2{
-    margin-bottom: 60px;
- }
-.adrees p {
-    display: flex;
-  flex-direction: column; /* يخلي الأيقونات فوق و HPI تحت */
-  align-items: center;   /* يخلي كل حاجة في النص */
-  justify-content: center;
-  text-align: center;    /* يخلي النصوص في النص */
-  margin: 0;
-  margin-bottom: 60px;
+.adrees { text-align:center; }
+
+.adrees-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;          /* مسافة بين النص والأيقونات */
+  margin-bottom:10px;
+  flex-wrap:wrap;    /* لو الشاشة صغيرة يسمح يلفّ */
+}
+
+.adrees-top p{
+  margin:0;
+  font-size:20px;
+  font-weight:600;
+  color:#0a6f6e;     /* نفس لون الهوية عندك تقريبًا */
+}
+
+.adrees .social{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.adrees .social a{
+  font-size:20px;    /* حجم الأيقونات */
+  color:#0a6f6e;
+  text-decoration:none;
+}
+
+.adrees .image img{
+  display:block;
+  margin:12px auto 0; /* تحتهم وفي النص */
+  height:auto;
+}
+.hpi span{
+  color: var(--secondary-color);
 }
 /*contact Us Ends*/
 
